@@ -1,0 +1,211 @@
+A1. Demonstrate and Create project in local and remote repository using GitBash and
+GitHub and apply init, status, log, add, commit, push, config, clone and reset
+commands on repository.
+
+git config --global user.name ""
+git config --global user.email "" 
+echo "# a1-devops" >> README.md
+git init
+git add README.md
+git status
+git commit -m "first commit"
+git log
+git branch -M main
+git remote add origin https://github.com/Sumukhmg/a1-devops.git
+git push -u origin main
+git clone url
+git reset --hard commitid
+
+A2. Demonstrate to create a project in remote repository and apply fork, merge, diff,
+merge conflict, branch and pull request concepts on repository using GitHub.
+
+fork in github
+mkdir devops
+cd devops
+git init a2
+git remote add origin github_url
+git branch -M main
+git branch b1
+nano file1.txt
+git add file1.txt
+git commit -m "add file1.txt"
+git branch b2
+nano file2.txt
+git add file2.txt
+git push origin main
+git diff main file1.txt
+code .
+change in file
+git merge b1/b2/main
+resolve conflict in vscode
+pull request in github
+
+A3. Demonstrate the process of integration github repository with Jenkins to automate
+the project execution in CI/CD pipeline.
+helloworld.py push to github
+go to jenkins-login
+new freestyle project
+src code mgmt->git paste github link
+build trigger ->poll scm
+build steps->python hello.py
+apply save build see console output
+
+B1. Create a docker image for an application stored in local repository and run the
+application using docker image.
+
+open docker desktop 
+helloworld.java
+public class helloworld{
+public static void main (String[] args){
+System.out.println("Hello World!!");
+}
+}
+Dockerfile
+FROM openjdk
+WORKDIR /app
+COPY . /app
+RUN javac helloworld.java
+CMD ["java", "helloworld"]
+
+docker build -t b1 .
+docker run --name b1 b1
+
+
+b2
+Create a process to dockerize the image for mysql database, demonstrate the
+working of client and server model using docker.
+
+open docker desktop
+$docker search mysql
+$docker run mysql
+$docker run -e MYSQL_ROOT_PASSWORD="root123" -d mysql
+$docker container ls
+docker inspect quirkly_euclid
+note ip address
+open another cmd wndw docker run -it mysql /bin/bash
+mysql -h ip -u root -p
+enter password: root123
+mysql-> create database db
+use db 
+CREATE TABLE Persons (
+    USN int,
+    NAME varchar(255),
+    DEPT varchar(255)
+);
+INSERT INTO persons
+VALUES (99, 'sumukh', 'ise');
+
+b3:
+B3. Create and configure Jenkins files for workflow and build of an application and
+push the image
+add.java
+Dockerfile
+FROM openjdk
+WORKDIR /app
+COPY . /app
+RUN javac add.java 
+CMD ["java", "add"]
+javac add.java
+java add.java
+docker build -t b3 .
+docker tag b3 sumukhmg/newname:v3
+docker login -u sumukhmg
+docker images
+docker push sumukhmg/newname:v3
+
+
+c1
+C1. Create a maven projects with all dependencies required for the application in
+CI/CD pipeline.
+
+group id com.devops
+artifactid mavens
+create maven proj->maven-archeatype-quickstart(apache)->enter y
+ReadJson.java in src/test/java
+package com.devops.mavenproject1;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class ReadJSON {
+
+	public static void main(String[] args) throws IOException, ParseException {
+		// TODO Auto-generated method stub
+		JSONParser jsonparser = new JSONParser();
+		FileReader reader = new FileReader("src/test/java/Json/student.json");
+		Object obj = jsonparser.parse(reader);
+		JSONObject studentobj = (JSONObject)obj;
+		String fname = (String)studentobj.get("firstname");
+		String lname = (String)studentobj.get("lastname");
+		System.out.println("Firstname:"+fname);
+		System.out.println("Lastname:"+lname);
+
+	}
+
+}
+student.json in src/test/json/stude.json
+{
+    "firstname" : "sumukh",
+    "lastname" : "kulkarni"
+}
+add dependency in pom.xml
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+</dependency>
+
+
+run
+
+
+
+
+c2:
+C2. Integrate communication channel with Jenkins for status of project and also
+enable email notification for a build.
+-slack new channel
+-plugin slack notification
+-2 link(edit config)
+-jenkins-> settings->system->slack->workspace->bsectionise-> credetinal -> add ->
+-create freestyle project
+-windows batch command
+post build -slack notifier- slack all notify
+
+
+c3:
+C3. Apply Xpath to locate elements in an application for automation testing in CI/CD
+pipeline
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+# Set the path to the ChromeDriver executable
+chrome_driver_path = "C:\\Users\\sumuk\\Downloads\\chromedriver-win64\\chromedriver.exe"
+
+# Initialize Chrome WebDriver with options
+options = webdriver.ChromeOptions()
+options.add_argument("--start-maximized")
+options.add_argument("driver-path=" + chrome_driver_path)  # Set the path to ChromeDriver
+
+# Initialize Chrome WebDriver
+driver = webdriver.Chrome(options=options)
+
+# Navigate to the website
+driver.get("https://www.vvce.ac.in/")
+
+# Find the element using XPath and click it
+element = driver.find_element(By.XPATH, "//span[text()='×'][1]")
+element.click()
+
+# Wait for 1 minute
+time.sleep(30)
+
+# Close the browser
+driver.quit()
+
+
+
